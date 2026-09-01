@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+preset="${1:-}"
+
+workspace_prelude='local w = hl.get_active_special_workspace() or hl.get_active_workspace(); if not w then error("no active workspace") end; local ws = w.special and tostring(w.name) or tostring(w.id);'
+
+case "$preset" in
+  center-master)
+    lua="$workspace_prelude hl.config({ master = { orientation = \"center\", mfact = 0.333, new_status = \"slave\", slave_count_for_center_master = 2 } }); hl.workspace_rule({ workspace = ws, layout = \"master\" }); return \"center-master\""
+    layout_messages=("orientationcenter" "mfact exact 0.333")
+    ;;
+  left-master)
+    lua="$workspace_prelude hl.config({ master = { orientation = \"left\", mfact = 0.5, new_status = \"slave\" } }); hl.workspace_rule({ workspace = ws, layout = \"master\" }); return \"left-master\""
+    layout_messages=("orientationleft" "mfact exact 0.5")
+    ;;
+  equal-columns)
+    lua="$workspace_prelude hl.config({ scrolling = { column_width = 0.333, direction = \"right\" } }); hl.workspace_rule({ workspace = ws, layout = \"scrolling\" }); return \"equal-columns\""
+    layout_messages=("colresize all 0.333")
+    ;;
+  *)
+    printf 'Unknown preset: %s\n' "$preset" >&2
+    exit 2
+    ;;
+esac
+
+hyprctl eval "$lua"
+
+# Workspace-rule changes are applied after the eval call returns. Send layout
+# messages separately so they reach the newly active engine rather than the
+# layout that was active before the preset switch.
+for message in "${layout_messages[@]}"; do
+  hyprctl dispatch "hl.dsp.layout(\"$message\")"
+done

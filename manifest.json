@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "conglomerate.marble",
+  "name": "Marble",
+  "version": "0.1.0",
+  "author": "Conglomerate",
+  "license": "MIT",
+  "homepage": "https://github.com/taavisaft/omarchy-conglomerate-marble",
+  "repository": "https://github.com/taavisaft/omarchy-conglomerate-marble.git",
+  "description": "Switch the active Hyprland workspace between ultrawide tiling presets.",
+  "kinds": ["bar-widget"],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Marble",
+    "description": "Choose a tiling preset for the active workspace.",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
