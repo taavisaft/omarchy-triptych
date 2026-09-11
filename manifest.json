@@ -1,19 +1,21 @@
 {
   "schemaVersion": 1,
-  "id": "conglomerate.marble",
-  "name": "Marble",
+  "id": "triptych",
+  "name": "Triptych",
   "version": "0.1.0",
-  "author": "Conglomerate",
+  "author": "Taavi Saft",
   "license": "MIT",
-  "homepage": "https://github.com/taavisaft/omarchy-conglomerate-marble",
-  "repository": "https://github.com/taavisaft/omarchy-conglomerate-marble.git",
+  "homepage": "https://github.com/taavisaft/omarchy-triptych",
+  "repository": "https://github.com/taavisaft/omarchy-triptych.git",
   "description": "Switch the active Hyprland workspace between ultrawide tiling presets.",
-  "kinds": ["bar-widget"],
+  "kinds": [
+    "bar-widget"
+  ],
   "entryPoints": {
     "barWidget": "BarWidget.qml"
   },
   "barWidget": {
-    "displayName": "Marble",
+    "displayName": "Triptych",
     "description": "Choose a tiling preset for the active workspace.",
     "category": "System",
     "allowMultiple": false,

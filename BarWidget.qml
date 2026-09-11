@@ -7,7 +7,7 @@ import qs.Ui
 
 BarWidget {
   id: root
-  moduleName: "conglomerate.marble"
+  moduleName: "triptych"
 
   property bool popupOpen: false
   property var selectedByWorkspace: ({})
@@ -17,7 +17,7 @@ BarWidget {
   property string statusText: "Choose a layout for this workspace"
 
   readonly property bool opened: popupOpen
-  readonly property string pluginDir: Quickshell.env("HOME") + "/.config/omarchy/plugins/conglomerate.marble"
+  readonly property string pluginDir: Quickshell.env("HOME") + "/.config/omarchy/plugins/triptych"
   readonly property var focusedWorkspace: Hyprland.focusedWorkspace
   readonly property int activeWorkspaceId: focusedWorkspace ? focusedWorkspace.id : -1
   readonly property string activeWorkspaceKey: String(activeWorkspaceId)
@@ -56,7 +56,7 @@ BarWidget {
     pendingWorkspaceKey = activeWorkspaceKey
     pendingWorkspaceLabel = activeWorkspaceLabel
     statusText = "Applying " + preset.name + " to workspace " + activeWorkspaceLabel + "…"
-    applyProcess.command = [pluginDir + "/marble-apply", preset.id]
+    applyProcess.command = [pluginDir + "/triptych-apply", preset.id]
     applyProcess.running = true
   }
 
@@ -113,7 +113,7 @@ BarWidget {
   implicitHeight: button.implicitHeight
 
   IpcHandler {
-    target: "conglomerate.marble"
+    target: "triptych"
 
     function open(): void { root.open() }
     function close(): void { root.close() }
@@ -158,7 +158,7 @@ BarWidget {
     bar: root.bar
     text: "▦"
     slotSize: Style.bar.statusSlot
-    tooltipText: "Marble"
+    tooltipText: "Triptych"
     active: root.popupOpen
     onPressed: function(mouseButton) {
       if (mouseButton === Qt.LeftButton) root.toggle()
@@ -180,7 +180,7 @@ BarWidget {
       spacing: Style.space(10)
 
       Text {
-        text: "Marble · Workspace " + root.activeWorkspaceLabel
+        text: "Triptych · Workspace " + root.activeWorkspaceLabel
         color: root.bar.foreground
         font.family: root.bar.fontFamily
         font.pixelSize: Style.font.subtitle
